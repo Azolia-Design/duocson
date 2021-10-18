@@ -25020,6 +25020,23 @@ setTimeout(function () {
   scrollmain.update();
 }, 500);
 
+function pageActive() {
+  if (jquery_default()('.homepage').length) {
+    jquery_default()("a[data-page='home']").addClass('active');
+  } else if (jquery_default()('.aboutpage').length) {
+    jquery_default()("a[data-page='about']").addClass('active');
+  } else if (jquery_default()('.productpage').length) {
+    jquery_default()("a[data-page='product']").addClass('active');
+  } else if (jquery_default()('.servicepage').length) {
+    jquery_default()("a[data-page='service']").addClass('active');
+  } else if (jquery_default()('.contactpage').length) {
+    jquery_default()("a[data-page='contact']").addClass('active');
+  }
+}
+
+;
+pageActive();
+
 function scriptHome() {
   if (jquery_default()('.homepage').length) {
     var initSwiperHero = function initSwiperHero() {
@@ -25066,6 +25083,75 @@ function scriptHome() {
 
 ;
 scriptHome();
+
+function scriptAbout() {
+  if (jquery_default()('.aboutpage').length) {
+    var dynamicHeight = function dynamicHeight() {
+      var height = document.querySelector('.content-static-wrap').offsetHeight + 1;
+      document.querySelector('.scheroabout-bg-wrap').setAttribute("style", "height: ".concat(height, "px"));
+    };
+
+    var businessAccordion = function businessAccordion() {
+      jquery_default()('.business-item').on('click', function (e) {
+        jquery_default()('.business-item').removeClass('active');
+        jquery_default()(this).addClass('active');
+      });
+    };
+
+    ;
+    jquery_default()(window).on("resize", function () {
+      dynamicHeight();
+    }).resize();
+    ;
+    businessAccordion();
+  }
+}
+
+scriptAbout();
+
+function scriptDetail() {
+  if (jquery_default()('.detailpage').length) {
+    var dynamicHeight = function dynamicHeight() {
+      var height = document.querySelector('.content-descrip-wrap').offsetHeight + 1;
+      document.querySelector('.scherodetail-bg-wrap').setAttribute("style", "height: ".concat(height, "px"));
+    };
+
+    var initSwiperProduct = function initSwiperProduct() {
+      var swiper = new core_class('.swiper-product', {
+        slidesPerView: 3,
+        spaceBetween: 32,
+        navigation: {
+          nextEl: '.swiper-btn-next',
+          prevEl: '.swiper-btn-prev'
+        }
+      });
+      swiper.init();
+    };
+
+    ;
+    jquery_default()(window).on("resize", function () {
+      dynamicHeight();
+    }).resize();
+    jquery_default()('.img-nav').on('click', function (e) {
+      e.preventDefault;
+      e.stopPropagation;
+      var target = jquery_default()(e.target).data('name');
+      console.log(target);
+      jquery_default()('.img-nav').removeClass('active');
+      jquery_default()(this).addClass('active');
+      jquery_default()('.img-main').removeClass('active');
+      jquery_default()(target).addClass('active');
+    });
+    ;
+    initSwiperProduct();
+  }
+}
+
+;
+scriptDetail();
+jquery_default()(window).on('load', function () {
+  jquery_default()('.loading-wrap').addClass('hidden');
+});
 })();
 
 /******/ })()
